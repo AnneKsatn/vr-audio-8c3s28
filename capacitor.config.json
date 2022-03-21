@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "vr-audio",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

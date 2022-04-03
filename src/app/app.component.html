@@ -1,31 +1,3 @@
 <ion-app>
-  <main class="main">
-    <ion-button color="success" size="large" [disabled]="isRecording" (click)="record()"> Record </ion-button>
-    <ion-button color="light" size="large" [disabled]="!isRecording" (click)="stop()"> Stop </ion-button> 
-
-    <webcam [height]="500" [width]="500" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
-      *ngIf="showWebcam" [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
-      [videoOptions]="videoOptions" [imageQuality]="1" (cameraSwitched)="cameraWasSwitched($event)"
-      (initError)="handleInitError($event)"  [videoOptions]="videoOptions"></webcam>
-
-
-    <ion-button class="take_snap" (click)="triggerSnapshot();">Take A Snapshot</ion-button>
-    <ion-button class="actionBtn" (click)="showNextWebcam(true);" [disabled]="!multipleWebcamsAvailable">Next
-      Webcam</ion-button>
-
-    <!-- <input id="cameraSwitchCheckbox" type="checkbox" [(ngModel)]="allowCameraSwitch"><label
-        for="cameraSwitchCheckbox">Allow Camera Switch</label>
-      <br /> -->
-    <!-- DeviceId: <input id="deviceId" type="text" [(ngModel)]="deviceId" style="width: 500px">
-      <ion-button (click)="showNextWebcam(deviceId);">Activate</ion-button> -->
-
-
-      <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-        <ion-fab-button (click)="addPhotoToGallery()">
-          <ion-icon name="camera"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-
-
-  </main>
+  <ion-router-outlet></ion-router-outlet>
 </ion-app>

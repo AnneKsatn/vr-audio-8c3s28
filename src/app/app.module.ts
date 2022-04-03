@@ -7,11 +7,12 @@ import { AppComponent } from './app.component';
 import { Media} from '@ionic-native/media'
 import { HttpClientModule } from '@angular/common/http';
 import { WebcamModule } from 'ngx-webcam';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule, WebcamModule],
+  imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule, AppRoutingModule, WebcamModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Media],
   bootstrap: [AppComponent],
 })

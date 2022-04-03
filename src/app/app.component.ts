@@ -3,6 +3,10 @@ declare const MediaRecorder: any;
 declare const navigator: any;
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { Subject, Observable } from 'rxjs';
+import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+
+// import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
+
 
 @Component({
   selector: 'app-root',
@@ -10,6 +14,15 @@ import { Subject, Observable } from 'rxjs';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  
+  public async addPhotoToGallery() {
+    // Take a photo
+    const capturedPhoto = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera,
+      quality: 100
+    });
+  }
 
   facingMode: string = 'environment';
 
@@ -23,19 +36,22 @@ export class AppComponent {
   public isRecording: boolean = false;
   private chunks: any = [];
   private mediaRecorder: any;
-
+  public videoOptions: MediaTrackConstraints = {
+    // width: {ideal: 1024},
+    // height: {ideal: 576}
+  };
   public errors: WebcamInitError[] = [];
 
   // latest snapshot
   public webcamImage: WebcamImage = null;
 
-  public get videoOptions(): MediaTrackConstraints {
-    const result: MediaTrackConstraints = {};
-    if (this.facingMode && this.facingMode !== '') {
-        result.facingMode = { ideal: this.facingMode };
-    }
-    return result;
-}
+//   public get videoOptions(): MediaTrackConstraints {
+//     const result: MediaTrackConstraints = {};
+//     if (this.facingMode && this.facingMode !== '') {
+//         result.facingMode = { ideal: this.facingMode };
+//     }
+//     return result;
+// }
 
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();

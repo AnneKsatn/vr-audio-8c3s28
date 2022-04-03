@@ -11,6 +11,8 @@ import { Subject, Observable } from 'rxjs';
 })
 export class AppComponent {
 
+  facingMode: string = 'environment';
+
   //video
   public showWebcam = true;
   public allowCameraSwitch = true;
@@ -26,6 +28,14 @@ export class AppComponent {
 
   // latest snapshot
   public webcamImage: WebcamImage = null;
+
+  public get videoOptions(): MediaTrackConstraints {
+    const result: MediaTrackConstraints = {};
+    if (this.facingMode && this.facingMode !== '') {
+        result.facingMode = { ideal: this.facingMode };
+    }
+    return result;
+}
 
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();

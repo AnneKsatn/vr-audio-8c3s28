@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef} from '@angular/core';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
@@ -22,7 +22,7 @@ export class Tab2Page {
     }
 
     const file: File = new File([u8arr], "file", { type: 'img/pmg' })
-    console.log(file);
+    // console.log(file);
     return file
   }
 
@@ -34,14 +34,16 @@ export class Tab2Page {
     });
 
     let b64 = 'data:image/jpeg;base64,' + capturedPhoto.base64String;
-    this.image = this.sanitizer.bypassSecurityTrustUrl(b64)
 
     let file = this.b64toBlob(capturedPhoto.base64String);
 
     this.saveImage(file)
   }
 
-  constructor(private sanitizer: DomSanitizer, private http: HttpClient) { }
+  constructor(
+    private sanitizer: DomSanitizer, 
+    private http: HttpClient, 
+    private ref: ChangeDetectorRef) { }
 
   saveImage(audioBlob) {
 
@@ -49,9 +51,11 @@ export class Tab2Page {
     formData.append('image', audioBlob)
 
 
-    this.http.post('https://ab26-93-175-28-10.in.ngrok.io/image', formData).subscribe(
+    this.http.post('https://c54b-93-175-28-10.in.ngrok.io/image', formData)
+    .subscribe(
       (resp: any)=>{
         console.log(resp['image'])
+        this.image = this.sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + resp['image'])
         // this.ref.detectChanges();
     })
   }

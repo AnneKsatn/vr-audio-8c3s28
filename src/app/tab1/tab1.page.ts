@@ -60,7 +60,8 @@ export class Tab1Page {
 
     formData.append('audio', audioBlob, 'audio')
 
-    this.http.post('https://ab26-93-175-28-10.in.ngrok.io/speech', formData).subscribe(
+    this.http.post('https://c54b-93-175-28-10.in.ngrok.io/speech', formData)
+    .subscribe(
       (resp: any)=>{
         this.text = resp['text']
         console.log(resp['text'])

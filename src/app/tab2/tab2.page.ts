@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-tab2',
@@ -40,22 +41,30 @@ export class Tab2Page {
     this.saveImage(file)
   }
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer, private http: HttpClient) { }
 
-  async saveImage(audioBlob) {
+  saveImage(audioBlob) {
 
     const formData = new FormData()
-    formData.append('file', audioBlob)
+    formData.append('image', audioBlob)
 
-    try {
-      await fetch('http://localhost:5000/save_image', {
-        method: 'POST',
-        body: formData
-      })
 
-      console.log('Saved')
-    } catch (e) {
-      console.error(e)
-    }
+    this.http.post('https://ab26-93-175-28-10.in.ngrok.io/image', formData).subscribe(
+      (resp: any)=>{
+        console.log(resp['image'])
+        // this.ref.detectChanges();
+    })
   }
+
+    // try {
+    //   await fetch('https://ab26-93-175-28-10.in.ngrok.io/image', {
+    //     method: 'POST',
+    //     body: formData
+    //   })
+
+    //   console.log('Saved')
+    // } catch (e) {
+    //   console.error(e)
+    // }
+  
 }

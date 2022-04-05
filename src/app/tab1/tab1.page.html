@@ -7,8 +7,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="main">
+  <div class="buttons">
     <ion-button color="success" size="large" [disabled]="isRecording" (click)="record()"> Record </ion-button>
     <ion-button color="light" size="large" [disabled]="!isRecording" (click)="stop()"> Stop </ion-button> 
+  </div>
+
+  <div class="text">
+    {{text | async}}
   </div>
 </ion-content>

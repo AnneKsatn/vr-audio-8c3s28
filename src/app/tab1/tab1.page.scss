@@ -1,4 +1,4 @@
-.main {
+.buttons {
     margin-top: 100px;
     display: flex;
     flex-direction: column;
@@ -8,4 +8,9 @@
 
 ion-button {
     width: 250px;
+}
+
+.text {
+    min-width: 400px;
+    min-height: 100px;
 }
